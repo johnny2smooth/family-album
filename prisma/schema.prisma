@@ -11,15 +11,16 @@ datasource db {
 }
 
 // schema.prisma
-model Home {
+model Photo {
   id          String   @id @default(cuid())
   image       String?
   title       String
   description String
-  price       Float
-  guests      Int
-  beds        Int
-  baths       Int
+  date        DateTime @db.Date
+  people      String[]
+  location    String?
+  // owner     User
+  // ownerId     User
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
