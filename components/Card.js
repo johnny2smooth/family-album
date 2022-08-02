@@ -7,10 +7,10 @@ const Card = ({
   id = '',
   image = '',
   title = '',
-  guests = 0,
-  beds = 0,
-  baths = 0,
-  price = 0,
+  description = '',
+  date = '',
+  people = [],
+  location = '',
   favorite = false,
   onClickFavorite = () => null,
 }) => (
@@ -30,7 +30,7 @@ const Card = ({
         </div>
         <button
           type="button"
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             if (typeof onClickFavorite === 'function') {
               onClickFavorite(id);
@@ -50,24 +50,18 @@ const Card = ({
       </div>
       <ol className="mt-1 inline-flex items-center space-x-1 text-gray-500">
         <li>
-          <span>{guests ?? 0} guests</span>
+          <span>era</span>
           <span aria-hidden="true"> · </span>
         </li>
         <li>
-          <span>{beds ?? 0} beds</span>
+          <span>{people ?? '0'}</span>
           <span aria-hidden="true"> · </span>
         </li>
         <li>
-          <span>{baths ?? 0} baths</span>
+          <span>{location ?? 'Location Unknown'}</span>
         </li>
       </ol>
-      <p className="mt-2">
-        {new Intl.NumberFormat('en-US', {
-          style: 'currency',
-          currency: 'USD',
-        }).format(price ?? 0)}{' '}
-        <span className="text-gray-500">/night</span>
-      </p>
+      <p className="mt-2">{description}</p>
     </a>
   </Link>
 );
