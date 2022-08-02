@@ -1,9 +1,19 @@
 import Layout from '@/components/Layout';
 import Grid from '@/components/Grid';
+import { PrismaClient } from '@prisma/client';
 
-import homes from 'data.json';
+const prisma = new PrismaClient();
 
-export default function Home() {
+export async function getServerSideProps() {
+  const photos = await prisma.photos.findMany();
+  return {
+    props: {
+      photos: JSON.parse(JSON.stringify(photos)),
+    },
+  };
+}
+
+export default function Home({ photos = [] }) {
   return (
     <Layout>
       <h1 className="text-xl font-medium text-gray-800">
@@ -13,7 +23,7 @@ export default function Home() {
         Explore some of the best places in the world
       </p>
       <div className="mt-8">
-        <Grid homes={homes} />
+        <Grid photos={photos} />
       </div>
     </Layout>
   );

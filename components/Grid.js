@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import Card from '@/components/Card';
 import { ExclamationIcon } from '@heroicons/react/outline';
 
-const Grid = ({ homes = [] }) => {
-  const isEmpty = homes.length === 0;
+const Grid = ({ photos = [] }) => {
+  const isEmpty = photos.length === 0;
 
-  const toggleFavorite = async id => {
+  const toggleFavorite = async (id) => {
     // TODO: Add/remove home from the authenticated user's favorites
   };
 
@@ -16,15 +16,15 @@ const Grid = ({ homes = [] }) => {
     </p>
   ) : (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      {homes.map(home => (
-        <Card key={home.id} {...home} onClickFavorite={toggleFavorite} />
+      {photos.map((photo) => (
+        <Card key={photo.id} {...photo} onClickFavorite={toggleFavorite} />
       ))}
     </div>
   );
 };
 
 Grid.propTypes = {
-  homes: PropTypes.array,
+  photos: PropTypes.array,
 };
 
 export default Grid;
