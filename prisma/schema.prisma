@@ -11,7 +11,7 @@ datasource db {
 }
 
 // schema.prisma
-model Photo {
+model Photos {
   id          String   @id @default(cuid())
   image       String?
   title       String
@@ -19,8 +19,16 @@ model Photo {
   date        DateTime @db.Date
   people      String[]
   location    String?
-  // owner     User
-  // ownerId     User
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String   @unique
+  photos    Photos[]
 }
