@@ -8,7 +8,7 @@ const Card = ({
   image = '',
   title = '',
   description = '',
-  date = '',
+  year = '',
   people = [],
   location = '',
   favorite = false,
@@ -50,7 +50,7 @@ const Card = ({
       </div>
       <ol className="mt-1 inline-flex items-center space-x-1 text-gray-500">
         <li>
-          <span>era</span>
+          <span>{year ?? 'Unknown era'}</span>
           <span aria-hidden="true"> · </span>
         </li>
         <li>

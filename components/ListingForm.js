@@ -10,10 +10,9 @@ import ImageUpload from '@/components/ImageUpload';
 const ListingSchema = Yup.object().shape({
   title: Yup.string().trim().required(),
   description: Yup.string().trim().required(),
-  price: Yup.number().positive().integer().min(1).required(),
-  guests: Yup.number().positive().integer().min(1).required(),
-  beds: Yup.number().positive().integer().min(1).required(),
-  baths: Yup.number().positive().integer().min(1).required(),
+  people: Yup.string().trim().required(),
+  location: Yup.string().trim().required(),
+  year: Yup.number().positive().integer().min(1900).required(),
 });
 
 const ListingForm = ({
@@ -27,7 +26,7 @@ const ListingForm = ({
   const [disabled, setDisabled] = useState(false);
   const [imageUrl, setImageUrl] = useState(initialValues?.image ?? '');
 
-  const upload = async image => {
+  const upload = async (image) => {
     // TODO: Upload image to remote storage
   };
 
@@ -55,10 +54,9 @@ const ListingForm = ({
     image: '',
     title: '',
     description: '',
-    price: 0,
-    guests: 1,
-    beds: 1,
-    baths: 1,
+    people: '',
+    location: '',
+    year: 1900,
   };
 
   return (
@@ -83,7 +81,7 @@ const ListingForm = ({
                 name="title"
                 type="text"
                 label="Title"
-                placeholder="Entire rental unit - Amsterdam"
+                placeholder="Neighborhood boys"
                 disabled={disabled}
               />
 
@@ -91,43 +89,32 @@ const ListingForm = ({
                 name="description"
                 type="textarea"
                 label="Description"
-                placeholder="Very charming and modern apartment in Amsterdam..."
+                placeholder="The boys diving into 1 ft. of water..."
                 disabled={disabled}
                 rows={5}
               />
 
-              <Input
-                name="price"
-                type="number"
-                min="0"
-                label="Price per night"
-                placeholder="100"
-                disabled={disabled}
-              />
-
               <div className="flex space-x-4">
                 <Input
-                  name="guests"
-                  type="number"
-                  min="0"
-                  label="Guests"
-                  placeholder="2"
+                  name="people"
+                  type="text"
+                  label="People"
+                  placeholder="Johnny"
                   disabled={disabled}
                 />
                 <Input
-                  name="beds"
-                  type="number"
-                  min="0"
-                  label="Beds"
-                  placeholder="1"
+                  name="location"
+                  type="text"
+                  label="Location"
+                  placeholder="Magnolia"
                   disabled={disabled}
                 />
                 <Input
-                  name="baths"
+                  name="year"
                   type="number"
-                  min="0"
-                  label="Baths"
-                  placeholder="1"
+                  min="1800"
+                  label="Est. year"
+                  placeholder="1800"
                   disabled={disabled}
                 />
               </div>
@@ -154,10 +141,9 @@ ListingForm.propTypes = {
     image: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
-    price: PropTypes.number,
-    guests: PropTypes.number,
-    beds: PropTypes.number,
-    baths: PropTypes.number,
+    people: PropTypes.string,
+    location: PropTypes.string,
+    year: PropTypes.number,
   }),
   redirectPath: PropTypes.string,
   buttonText: PropTypes.string,

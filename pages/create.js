@@ -1,8 +1,9 @@
 import Layout from '@/components/Layout';
 import ListingForm from '@/components/ListingForm';
+import axios from 'axios';
 
 const Create = () => {
-  const addHome = () => null;
+  const addPhotos = (data) => axios.post('/api/photos', data);
 
   return (
     <Layout>
@@ -15,7 +16,7 @@ const Create = () => {
           <ListingForm
             buttonText="Add Photo"
             redirectPath="/"
-            onSubmit={addHome}
+            onSubmit={addPhotos}
           />
         </div>
       </div>
